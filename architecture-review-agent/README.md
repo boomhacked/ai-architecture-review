@@ -84,7 +84,6 @@ However, configurations that are defined outside the IaC files will not be cover
 - Vector database settings configured through a dashboard
 - Guardrail features enabled by clicking
  
-If the reviewing agent can be given read-only execution rather than file reads alone, `terraform show` against state resolves values and drift, and a few read-only cloud calls resolve effective permissions. With it, the residual list shrinks to provider console settings and anything managed outside IaC, which is small enough to itemize and confirm by hand.
 
 ## Validating the blast radius chain
 
