@@ -80,15 +80,17 @@ The review reads a repository. A meaningful share of real AI incidents are confi
 Putting infrastructure-as-code in scope closes part of this, and the agent is instructed to read it. Declared network exposure, encryption at rest, private endpoints, whether logging is enabled, and IAM policy documents as written are all answerable from Terraform or its equivalent.
 
 However, reading the IaC files has limits. Some configuration is defined outside them entirely:
-- Provider console settings, particularly model-provider retention and training-use toggles
-- Vector database settings configured through a dashboard
-- Guardrail features enabled by clicking
-- Roles created by hand during an incident
+
+* Provider console settings, particularly model-provider retention and training-use toggles
+* Vector database settings configured through a dashboard
+* Guardrail features enabled by clicking
+* Roles created by hand during an incident
 
 And some is in the files but cannot be resolved from them alone:
-- Values applied at deploy time.
-- Drift
-- Effective permissions.
+
+* **Values applied at deploy time.** The files show which variables exist, not what they are set to. Actual values can come from tfvars kept in another repository, from CI secrets, or from workspace-specific settings.
+* **Drift.** The files show what is supposed to be deployed. The live environment can differ if someone changed something directly in the console, or if an update was never applied.
+* **Effective permissions.** The files show the policy attached to a role. What the role can actually do also depends on SCPs, permission boundaries, and role chaining, which matters when checking whether a tool credential is over-permissioned.
  
 
 ## Validating the blast radius chain
